@@ -9,7 +9,7 @@ include("mysqli.php");
 $db = new Db();
 
 // Fetch feedback data from the database in reverse order
-$sql = "SELECT name, email, message, added FROM feedback ORDER BY added DESC";
+$sql = "SELECT id, name, email, message, added FROM feedback ORDER BY added DESC";
 $rows = $db->dbGetArray($sql);
 
 ?>
@@ -19,6 +19,19 @@ $rows = $db->dbGetArray($sql);
     <meta charset="UTF-8">
     <title>Tagasiside haldus</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .delete-btn {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .delete-btn:hover {
+            background-color: #c82333;
+        }
+    </style>
 </head>
 <body class="bg-light">
     <div class="container mt-5">
@@ -35,6 +48,7 @@ $rows = $db->dbGetArray($sql);
                         <th>Nimi</th>
                         <th>E-post</th>
                         <th>Sõnum</th>
+                        <th>Tegevus</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -44,6 +58,12 @@ $rows = $db->dbGetArray($sql);
                             <td><?= htmlspecialchars($row['name']) ?></td>
                             <td><?= htmlspecialchars($row['email']) ?></td>
                             <td><?= htmlspecialchars($row['message']) ?></td>
+                            <td>
+                                <form action="delete_feedback.php" method="POST" style="display: inline;">
+                                    <input type="hidden" name="id" value="<?= $row['id'] ?>">
+                                    <button type="submit" class="delete-btn" onclick="return confirm('Kas olete kindel, et soovite seda tagasisidet kustutada?')">Kustuta</button>
+                                </form>
+                            </td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>

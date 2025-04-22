@@ -24,6 +24,25 @@ sest õpetaja githubi ilma kutseta lisada ei saa, selle asemel peab olmea teie e
 # Tegija tegemised
 
 Siia palun tee loetelu kõikidest asjadest mida sa tegid. Järjekord pole oluline.
-* Tegevus
+* Parooli muutmine 'tiina123'
+
+* Tegin uue SQL andmebaasi 'feedback' samanimelise tabeliga, kus on veerud (id, name,email,message,added)
+
+* Lisasin SQL andmebaasi andmetele uue faili 'settings.php' 
+ - lisasin faili .gitignore nimekirja, sest neid andmeid ei tohi avaldada
+
+* SQL andmete saatmine
+'submit_feedback.php' faili täiendus:
+- sql INSERT INTO feedback...
+- ühendan failid (include("settings.php");include("mysqli.php");$db = new Db();)
+
+* SQL andmete lugemine
+'admin.php' faili täiendus:
+- sql SELECT FROM feedback...
+- ühendan failid (include("settings.php");include("mysqli.php");$db = new Db();)
+
+* SQL andmete kustutamine
+ - lisasin uue faili 'delete_feedback.php'
+ - täiendasin faili 'admin.php' nupuga
 * ...
 
