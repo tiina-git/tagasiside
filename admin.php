@@ -4,17 +4,14 @@ if ($_COOKIE["admin_auth"] !== "true") {
     exit;
 }
 
-// CSV lugemine
-$rows = [];
-if (file_exists("feedback.csv")) {
-    $lines = file("feedback.csv", FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-    foreach ($lines as $line) {
-        $fields = explode(";", $line);
-        if (count($fields) >= 4) {
-            $rows[] = $fields;
-        }
-    }
-}
+include("settings.php");
+include("mysqli.php");
+$db = new Db();
+
+// Fetch feedback data from the database in reverse order
+$sql = "SELECT name, email, message, added FROM feedback ORDER BY added DESC";
+$rows = $db->dbGetArray($sql);
+
 ?>
 <!DOCTYPE html>
 <html lang="et">
@@ -27,12 +24,10 @@ if (file_exists("feedback.csv")) {
     <div class="container mt-5">
         <h2>Laekunud tagasiside</h2>
         <div class="d-flex justify-content-end align-items-center mb-3">
-            
-
             <a href="index.php" class="btn btn-outline-success me-1">Avaleht</a>
             <a href="logout.php" class="btn btn-outline-danger">Logi välja</a>
         </div>
-        <?php if (count($rows) > 0): ?>
+        <?php if ($rows): ?>
             <table class="table table-bordered table-striped">
                 <thead class="table-dark">
                     <tr>
@@ -43,11 +38,12 @@ if (file_exists("feedback.csv")) {
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($rows as $r): ?>
+                    <?php foreach ($rows as $row): ?>
                         <tr>
-                            <?php foreach ($r as $col): ?>
-                                <td><?= htmlspecialchars($col) ?></td>
-                            <?php endforeach; ?>
+                            <td><?= htmlspecialchars($row['added']) ?></td>
+                            <td><?= htmlspecialchars($row['name']) ?></td>
+                            <td><?= htmlspecialchars($row['email']) ?></td>
+                            <td><?= htmlspecialchars($row['message']) ?></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>

@@ -1,5 +1,5 @@
 <?php
-$correct_password = "admin123";
+$correct_password = "tiina123";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'] ?? '';
