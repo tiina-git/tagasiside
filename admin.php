@@ -9,7 +9,7 @@ include("mysqli.php");
 $db = new Db();
 
 // Fetch feedback data from the database in reverse order
-$sql = "SELECT id, name, email, message, added FROM feedback ORDER BY added DESC";
+$sql = "SELECT id, name, email, message, DATE_FORMAT(added, '%d.%m.%Y %H:%i:%s')as added FROM feedback ORDER BY added DESC";
 $rows = $db->dbGetArray($sql);
 
 ?>
@@ -62,6 +62,7 @@ $rows = $db->dbGetArray($sql);
                                 <form action="delete_feedback.php" method="POST" style="display: inline;">
                                     <input type="hidden" name="id" value="<?= $row['id'] ?>">
                                     <button type="submit" class="delete-btn" onclick="return confirm('Kas olete kindel, et soovite seda tagasisidet kustutada?')">Kustuta</button>
+                                    
                                 </form>
                             </td>
                         </tr>
