@@ -56,6 +56,7 @@ function prepareGetArray($sql, $types = null, $params = [])
 - sql SELECT FROM feedback...
 - ühendan failid (include("settings.php");include("mysqli.php");$db = new Db();)
 
+<<<<<<< HEAD
 * SQL andmete kustutamine 
 
  - lisasin uue faili 'delete_feedback.php'
@@ -65,4 +66,11 @@ function prepareGetArray($sql, $types = null, $params = [])
   - lisasin veeru ja nupu 'Kustuta' tagasiside juurde
   - kui admin vajutab kustuta nuppu, siis küsitakse üle, kas ta on kindel, et soovib andmeid kustutada
   
+=======
+* SQL andmete kustutamine
+ - lisasin uue faili 'delete_feedback.php'
+ - täiendasin faili 'admin.php' nupuga
+ - * ...
+
+>>>>>>> 70e274af824c73026dbe289dbe58879f32c1a9a0
 
