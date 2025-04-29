@@ -43,4 +43,6 @@ Siia palun tee loetelu kõikidest asjadest mida sa tegid. Järjekord pole olulin
 * SQL andmete kustutamine
  - lisasin uue faili 'delete_feedback.php'
  - täiendasin faili 'admin.php' nupuga
+ - * ...
+
 
