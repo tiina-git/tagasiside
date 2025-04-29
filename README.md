@@ -45,7 +45,6 @@ function prepareGetArray($sql, $types = null, $params = [])
 - lisaks veel mõned koolis tehtud funktsioonid 
 
 
-
 * SQL andmete saatmine
 'submit_feedback.php' faili täiendus:
 - sql INSERT INTO feedback...
@@ -56,10 +55,6 @@ function prepareGetArray($sql, $types = null, $params = [])
 - sql SELECT FROM feedback...
 - ühendan failid (include("settings.php");include("mysqli.php");$db = new Db();)
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 18b97cea5eba6fb0453d043d5fed4a76ded7e8bf
 * SQL andmete kustutamine 
 
  - lisasin uue faili 'delete_feedback.php'
