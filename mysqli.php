@@ -2,12 +2,14 @@
 class Db {
     private $con; // ühendus salvestatakse siia
     function __construct() {
+        date_default_timezone_set('Europe/Tallinn');
         $this->con = new mysqli(DB_SERVER,DB_USER,DB_PASS, DB_NAME);
         if($this->con->connect_errno){
             echo "<strong>Viga andmebaasiga:</strong> ".$this->con->connect_errno;
         
         }else{
             mysqli_set_charset($this->con,"utf8");
+            mysqli_query($this->con, "SET time_zone = '+02:00'");
         }
     }
     # update, insert, delete
@@ -22,6 +24,46 @@ class Db {
         }
         return false;
     }
+
+    # Turvalisuses suurendamine INSERT/UPDATE/DELETE
+    function prepareQuery($sql, $types, $params) {
+        if($this->con) {
+            $stmt = $this->con->prepare($sql);
+            if($stmt === false) {
+                echo "<div>Vigane päring: " . htmlspecialchars($sql) . "</div>";
+                return false;
+            }
+            $stmt->bind_param($types, ...$params);
+            $result = $stmt->execute();
+            $stmt->close();
+            return $result;
+        }
+        return false;
+    }
+
+    # Turvalisuses suurendamine SELECT päringule
+    function prepareGetArray($sql, $types = null, $params = []) {
+        if($this->con) {
+            $stmt = $this->con->prepare($sql);
+            if($stmt === false) {
+                echo "<div>Vigane päring: " . htmlspecialchars($sql) . "</div>";
+                return false;
+            }
+            if($types && $params) {
+                $stmt->bind_param($types, ...$params);
+            }
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $data = [];
+            while($row = $result->fetch_assoc()) {
+                $data[] = $row;
+            }
+            $stmt->close();
+            return !empty($data) ? $data : false;
+        }
+        return false;
+    }
+
     # select sql lause jaoks
     function dbGetArray($sql){
         $res = $this->dbQuery($sql);
