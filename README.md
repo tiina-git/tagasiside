@@ -27,8 +27,24 @@ Siia palun tee loetelu kõikidest asjadest mida sa tegid. Järjekord pole olulin
 
 * Tegin uue SQL andmebaasi 'feedback' samanimelise tabeliga, kus on veerud (id, name, email, message, added)
 
-* Lisasin SQL andmebaasi andmetele uue faili 'settings.php' 
+* Lisasin SQL andmebaasi andmetele uue faili 'settings.php' , mis sisaldab serveri aadressi(localhost), kasutajanime(root), parooli (hetkel pole) ja andmebaasi nime (feedback)
  - lisasin faili .gitignore nimekirja, sest neid andmeid ei tohi avaldada
+
+* Kuna 'include' folderiga (nagu koolis tegime) millegipärast ühendused korrektselt tööle ei hakanud, siis lisasin 'include' koodid eraldi failidesse ('feedback.php' ja 'admin.php')
+
+* SQL andmebaasiga ühenduse loomiseks lisasin 'mysqli.php' faili
+-siin asub Db klass ühenduse konstruktoriga 'function __construct()'
+- siin määrasin ära ajatsooni, millega kuvatakse admin lehel aega (Parandasin timezone +3 suveajaga) ja siin on kirjas, et kasutatakse eesti täpitähti (utf8)
+- andmete lisamine, muutmine ja kustutamine 'function dbQuery'
+- andmete päring 'function dbGetArray'
+- POST (vormi andmed)/ GET (url andmed)väärtuste tagastamine
+- Turvalisuses suurendamine INSERT/UPDATE/DELETE 
+function prepareQuery($sql, $types, $params)
+- Turvalisuses suurendamine SELECT päringule
+function prepareGetArray($sql, $types = null, $params = []) 
+- lisaks veel mõned koolis tehtud funktsioonid 
+
+
 
 * SQL andmete saatmine
 'submit_feedback.php' faili täiendus:
@@ -40,8 +56,13 @@ Siia palun tee loetelu kõikidest asjadest mida sa tegid. Järjekord pole olulin
 - sql SELECT FROM feedback...
 - ühendan failid (include("settings.php");include("mysqli.php");$db = new Db();)
 
-* SQL andmete kustutamine
+* SQL andmete kustutamine 
+
  - lisasin uue faili 'delete_feedback.php'
- - täiendasin faili 'admin.php' nupuga
-* ...
+  siin võetakse 'POST id' ja selle järgi leitakse üles postitus andmebaasist ja kustutatakse kui admin vajutab 'kustuta' nuppu tagasisside kõrval
+
+ - täiendasin faili 'admin.php' 
+  - lisasin veeru ja nupu 'Kustuta' tagasiside juurde
+  - kui admin vajutab kustuta nuppu, siis küsitakse üle, kas ta on kindel, et soovib andmeid kustutada
+  
 

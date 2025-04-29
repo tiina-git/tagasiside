@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         echo "<a href='javascript:history.back()'>Tagasi</a>";
     }
 
-    // SQL insertion
+    // SQL andmete lisamine andmebaasi
     if (empty($errors)) {
         $sql = "INSERT INTO feedback (name, email, message, added) VALUES (?, ?, ?, ?)";
         $types = "ssss";

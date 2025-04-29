@@ -1,6 +1,6 @@
 <?php 
 class Db {
-    private $con; // ühendus salvestatakse siia
+    private $con; // Ühendus salvestatakse siia
     function __construct() {
         date_default_timezone_set('Europe/Tallinn');
         $this->con = new mysqli(DB_SERVER,DB_USER,DB_PASS, DB_NAME);
@@ -12,7 +12,7 @@ class Db {
             mysqli_query($this->con, "SET time_zone = '+02:00'");
         }
     }
-    # update, insert, delete
+    # UPDATE, INSERT, DELETE
     function dbQuery($sql){
         if($this->con){
             $res = mysqli_query($this->con, $sql);
@@ -64,7 +64,7 @@ class Db {
         return false;
     }
 
-    # select sql lause jaoks
+    # SELECT sql lause jaoks
     function dbGetArray($sql){
         $res = $this->dbQuery($sql);
         if($res!== false){

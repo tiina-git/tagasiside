@@ -21,5 +21,5 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["id"])) {
 } else {
     echo "<div class='alert alert-danger'>Vigane päring.</div>";
 }
-echo "<a href='admin.php'>Tagasi admin lehele</a>";
+echo "<a href='admin.php'>Tagasi admin lehele...</a>";
 ?>
