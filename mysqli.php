@@ -50,7 +50,9 @@ class Db {
                 return false;
             }
             if($types && $params) {
-                $stmt->bind_param($types, ...$params);
+                if($types && $params) {
+                    $stmt->bind_param($types, ...$params);
+                }
             }
             $stmt->execute();
             $result = $stmt->get_result();
@@ -130,3 +132,5 @@ class Db {
     }
 
     } // class Db lõpp
+}
+?>

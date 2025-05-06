@@ -9,8 +9,8 @@ include("mysqli.php");
 $db = new Db();
 
 // SQl andmete lugemine andmebaasist (viimasena lisatud eespool)
-$sql = "SELECT id, name, email, message, DATE_FORMAT(added, '%d.%m.%Y %H:%i:%s')as added FROM feedback ORDER BY added DESC";
-$rows = $db->dbGetArray($sql);
+$sql = "SELECT id, name, email, message, DATE_FORMAT(added, '%d.%m.%Y %H:%i:%s') as added FROM feedback ORDER BY added DESC";
+$rows = $db->prepareGetArray($sql);
 
 ?>
 <!DOCTYPE html>
